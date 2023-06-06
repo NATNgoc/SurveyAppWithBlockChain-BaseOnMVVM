@@ -33,25 +33,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/dots_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:dotsColor="@color/purple_main"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="16dp"
-                app:dotsSpacing="4dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:progressMode="true"
-                app:selectedDotColor="@color/purple_main">
+                <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                    android:id="@+id/dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:dotsColor="@color/purple_main"
+                    app:dotsStrokeColor="@color/purple_main"
+                    app:dotsCornerRadius="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:dotsSize="16dp"
+                    app:dotsSpacing="4dp"
+                    app:layout_constraintVertical_bias="0.2"
+                    app:dotsStrokeWidth="2dp"
+                    />
 
-
-            </com.tbuonomo.viewpagerdotsindicator.DotsIndicator>
 
             <Button
                 android:id="@+id/button2"

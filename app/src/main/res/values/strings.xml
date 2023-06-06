@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Q&amp;Answer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Khảo sát này nhằm tìm hiểu về việc sử dụng và quan điểm của người dùng về các thiết bị công nghệ. Các câu hỏi trong khảo sát sẽ tập trung vào việc tìm hiểu về loại thiết bị công nghệ mà người dùng sử dụng, mức độ hài lòng với các thiết bị này, và quan điểm về sự phát triển công nghệ trong tương lai.</string>
 </resources>
