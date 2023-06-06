@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1044117262878",
+    "firebase_url": "https://survey-app-attt-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "survey-app-attt",
+    "storage_bucket": "survey-app-attt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044117262878:android:3100a34287fc365aadd40f",
+        "android_client_info": {
+          "package_name": "com.example.qa_answer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE-nGMTlMBOq6uGOp7lUwVLv0a0eoJ6hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044117262878:android:9a701502639c48cbadd40f",
+        "android_client_info": {
+          "package_name": "com.example.qanswer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE-nGMTlMBOq6uGOp7lUwVLv0a0eoJ6hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044117262878:android:d788578cbaf613c3add40f",
+        "android_client_info": {
+          "package_name": "com.example.surveyapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE-nGMTlMBOq6uGOp7lUwVLv0a0eoJ6hw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
