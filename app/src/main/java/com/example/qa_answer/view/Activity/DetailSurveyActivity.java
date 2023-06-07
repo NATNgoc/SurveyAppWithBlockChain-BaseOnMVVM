@@ -78,11 +78,12 @@ public class DetailSurveyActivity extends AppCompatActivity {
         binding.imgSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog=new LoadingDialog(DetailSurveyActivity.this);
+                dialog.show();
                 if (check()==false) {
+                    dialog.dismiss();
                     Toast.makeText(DetailSurveyActivity.this,"Bạn chưa điền hết đáp án",Toast.LENGTH_SHORT).show();
                 } else {
-                    dialog=new LoadingDialog(DetailSurveyActivity.this);
-                    dialog.show();
                     FirebaseDatabase.getInstance().getReference("Block").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,7 +97,7 @@ public class DetailSurveyActivity extends AppCompatActivity {
                                 lastBlock = lastChild.getValue(Block.class);
                                 Block newBlock=new Block(lastBlock.getIndex()+1,new Date().getTime(),lastBlock.getHash(),UserRepository.getInstance().getmFirebaseAuth().getUid()
                                         ,currentSurvey.getReward());
-                                newBlock.mineBlock(4);
+                                newBlock.mineBlock(BlockChain.getInstance().getProofOfWork());
                                 FirebaseDatabase.getInstance().getReference("Block").child(newBlock.getIndex()+"")
                                         .setValue(newBlock).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -106,7 +107,6 @@ public class DetailSurveyActivity extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         dialog.dismiss();
-                                                        finish();
                                                     }
                                                 });
                                             }

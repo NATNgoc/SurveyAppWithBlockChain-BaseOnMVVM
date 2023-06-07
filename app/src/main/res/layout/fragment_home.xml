@@ -80,13 +80,14 @@
                 android:background="@drawable/card_money_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1">
+                app:layout_constraintVertical_bias="0.666">
 
                 <TextView
                     android:id="@+id/txtToken"
-                    android:layout_width="48dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="@{String.valueOf(HomeViewModel.user.token)}"
@@ -131,6 +132,16 @@
                     app:layout_constraintEnd_toStartOf="@+id/textView5"
                     app:layout_constraintTop_toTopOf="@+id/textView5"
                     app:srcCompat="@drawable/baseline_circle_24" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="308dp"
+                    android:layout_height="121dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@mipmap/grapp"
+                    app:layout_constraintLeft_toLeftOf="@id/txtToken"
+                    app:layout_constraintRight_toRightOf="@id/txtToken"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.cardview.widget.CardView

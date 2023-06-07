@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.qa_answer.data.model.BlockChain;
 import com.example.qa_answer.databinding.ActivityLoginBinding;
 import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.LoginViewModel;

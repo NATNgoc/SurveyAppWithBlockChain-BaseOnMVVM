@@ -16,9 +16,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.qa_answer.data.model.Block;
 import com.example.qa_answer.data.model.User;
 import com.example.qa_answer.databinding.FragmentHomeBinding;
 import com.example.qa_answer.view_model.HomeViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeFragment extends Fragment {
 
