@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
-                Fragment tmp;
+                Fragment tmp=new HomeFragment();
                 switch (i) {
                     case 0:
                         tmp=new HomeFragment();
@@ -46,8 +46,6 @@ public class HomeActivity extends AppCompatActivity {
                     case 1:
                         tmp=new SurveyFragment();
                         break;
-                    default:
-                        tmp=new HomeFragment();
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.layoutBackground,tmp).commit();
                 return true;

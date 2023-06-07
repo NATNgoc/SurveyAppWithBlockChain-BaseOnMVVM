@@ -11,15 +11,16 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="480dp"
         android:layout_margin="10dp"
         app:cardCornerRadius="20dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:orientation="vertical"
-            android:weightSum="11">
+            android:weightSum="10">
 
             <ImageView
                 android:id="@+id/imgSurvey"
@@ -27,14 +28,14 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                app:imgUrl="@{Item.imageOfSurvey}"
                 android:layout_weight="2.5"
+                app:imgUrl="@{Item.imageOfSurvey}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="8"
+                android:layout_weight="7.5"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
@@ -67,8 +68,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            app:timeStamp="@{Item.dateEnd}"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            app:timeStamp="@{Item.dateEnd}" />
                     </LinearLayout>
 
                     <ScrollView
@@ -118,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/montserrat_bold"
                         android:text="Name Survey:"
                         android:textSize="14sp"
@@ -134,9 +135,10 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"
+
+                        android:maxLines="1"
                         android:text="@{Item.nameOfSurvey}"
                         android:textSize="16sp"
-
                         app:layout_constraintBottom_toTopOf="@+id/textView11"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView12"
@@ -165,9 +167,9 @@
                             android:id="@+id/txtDateStart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:timeStamp="@{Item.dateStart}"
                             android:layout_marginStart="10dp"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            app:timeStamp="@{Item.dateStart}" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -181,14 +183,14 @@
                         android:id="@+id/txtMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Item.reward}"
+                        android:text="@{String.valueOf(Item.reward)}"
                         android:textSize="60sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.4" />
+                        app:layout_constraintVertical_bias="0.5" />
 
                     <TextView
                         android:id="@+id/textView18"
@@ -202,13 +204,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnSurvey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.5"
-                android:text="Star Survey" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

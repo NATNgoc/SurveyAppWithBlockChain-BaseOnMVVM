@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.Fragment.HomeFragment">
+    tools:context=".view.Fragment.SurveyFragment">
 
     <data>
         <variable
-            name="HomeViewModel"
-            type="com.example.qa_answer.view_model.HomeViewModel" />
+            name="SurveyViewModel"
+            type="com.example.qa_answer.view_model.SurveyViewModel" />
     </data>
 
     <LinearLayout
@@ -67,9 +67,10 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9" >
+            android:layout_weight="9">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>

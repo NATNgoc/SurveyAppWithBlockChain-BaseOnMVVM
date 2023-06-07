@@ -15,7 +15,7 @@ public class SurveyRepository {
     private FirebaseDatabase mFirebaseDatabase;
     MutableLiveData<ArrayList<Survey>> mListSurvey;
 
-    SurveyRepository() {
+    public SurveyRepository() {
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         mListSurvey=new MutableLiveData<>(new ArrayList<Survey>());
     }
@@ -27,7 +27,7 @@ public class SurveyRepository {
                 ArrayList<Survey> ds=new ArrayList<>();
                 for (DataSnapshot item: snapshot.getChildren()) {
                     Survey tmp=item.getValue(Survey.class);
-                    if (tmp!=null) ds.add(tmp);
+                    ds.add(tmp);
                 }
                 mListSurvey.postValue(ds);
             }
