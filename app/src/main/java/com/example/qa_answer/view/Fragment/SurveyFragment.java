@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Fragment;
+package com.example.qa_answer.view.Fragment;
 
 import android.os.Bundle;
 

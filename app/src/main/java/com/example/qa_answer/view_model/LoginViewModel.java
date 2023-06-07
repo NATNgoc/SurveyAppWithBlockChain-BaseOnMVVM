@@ -6,9 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.qa_answer.Data.Repository.UserRepository;
+import com.example.qa_answer.data.repository.UserRepository;
 
-import com.example.qa_answer.View.Dialog.LoadingDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

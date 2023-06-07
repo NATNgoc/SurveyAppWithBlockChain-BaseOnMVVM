@@ -1,15 +1,15 @@
-package com.example.qa_answer.Data.Model;
+package com.example.qa_answer.data.model;
 
 public class Survey {
     String idSurvey;
     String nameOfSurvey;
     String description;
-    Double dateStart;
+    long dateStart;
     String imageOfSurvey;
-    Double dateEnd;
+    long dateEnd;
     int reward;
 
-    public Survey(String idSurvey, String nameOfSurvey, String description, Double dateStart, String imageOfSurvey, Double dateEnd, int reward) {
+    public Survey(String idSurvey, String nameOfSurvey, String description, long dateStart, String imageOfSurvey, long dateEnd, int reward) {
         this.idSurvey = idSurvey;
         this.nameOfSurvey = nameOfSurvey;
         this.description = description;
@@ -54,19 +54,19 @@ public class Survey {
         this.description = description;
     }
 
-    public Double getDateStart() {
+    public long getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Double dateStart) {
+    public void setDateStart(long dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Double getDateEnd() {
+    public long getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Double dateEnd) {
+    public void setDateEnd(long dateEnd) {
         this.dateEnd = dateEnd;
     }
 

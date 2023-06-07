@@ -1,4 +1,4 @@
-package com.example.qa_answer.Data.Model;
+package com.example.qa_answer.data.model;
 
 public class Answer {
     String idQuestion;

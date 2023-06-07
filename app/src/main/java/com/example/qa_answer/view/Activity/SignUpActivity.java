@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Activity;
+package com.example.qa_answer.view.Activity;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -15,9 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import com.example.qa_answer.R;
-import com.example.qa_answer.View.Dialog.ForgotpassDialog;
-import com.example.qa_answer.View.Dialog.LoadingDialog;
 import com.example.qa_answer.databinding.ActivitySignUpBinding;
+import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.SignUpViewModel;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;

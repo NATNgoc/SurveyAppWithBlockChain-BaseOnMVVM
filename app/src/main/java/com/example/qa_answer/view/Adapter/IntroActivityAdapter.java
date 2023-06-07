@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Adapter;
+package com.example.qa_answer.view.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qa_answer.R;
 import com.example.qa_answer.databinding.ItemAdapterIntroactivityBinding;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

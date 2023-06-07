@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.qa_answer.Data.Model.User;
-import com.example.qa_answer.Data.Repository.UserRepository;
+import com.example.qa_answer.data.model.User;
+import com.example.qa_answer.data.repository.UserRepository;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;

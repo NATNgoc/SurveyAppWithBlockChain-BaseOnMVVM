@@ -15,22 +15,22 @@
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".View.Activity.LoginActivity"
+            android:name=".view.Activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.HomeActivity"
+            android:name=".view.Activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.SignUpActivity"
+            android:name=".view.Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.MainActivity"
+            android:name=".view.Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.ForgotActivity"
+            android:name=".view.Activity.ForgotActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.IntroActivity"
+            android:name=".view.Activity.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

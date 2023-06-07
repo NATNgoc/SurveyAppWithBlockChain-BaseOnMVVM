@@ -1,13 +1,8 @@
-package com.example.qa_answer.Data.Repository;
+package com.example.qa_answer.data.repository;
 
-import androidx.annotation.NonNull;
-
-import com.example.qa_answer.Data.Model.User;
+import com.example.qa_answer.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class UserRepository {
     private static UserRepository instance=null;

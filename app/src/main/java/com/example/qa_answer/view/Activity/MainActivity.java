@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Activity;
+package com.example.qa_answer.view.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

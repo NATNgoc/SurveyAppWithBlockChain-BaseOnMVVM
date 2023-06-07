@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Activity;
+package com.example.qa_answer.view.Activity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.qa_answer.R;
-import com.example.qa_answer.View.Dialog.ForgotpassDialog;
+import com.example.qa_answer.view.Dialog.ForgotpassDialog;
 import com.example.qa_answer.databinding.ActivityForgotBinding;
 import com.example.qa_answer.view_model.ForgotViewModel;
 

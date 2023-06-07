@@ -1,19 +1,16 @@
-package com.example.qa_answer.View.Activity;
+package com.example.qa_answer.view.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.qa_answer.R;
-import com.example.qa_answer.View.Dialog.LoadingDialog;
 import com.example.qa_answer.databinding.ActivityLoginBinding;
+import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.LoginViewModel;
 
 

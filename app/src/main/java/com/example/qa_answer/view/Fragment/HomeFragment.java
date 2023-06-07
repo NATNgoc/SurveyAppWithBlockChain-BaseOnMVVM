@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Fragment;
+package com.example.qa_answer.view.Fragment;
 
 import android.os.Bundle;
 
@@ -16,10 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.qa_answer.Data.Model.User;
-import com.example.qa_answer.R;
-import com.example.qa_answer.View.Activity.HomeActivity;
-import com.example.qa_answer.View.Dialog.LoadingDialog;
+import com.example.qa_answer.data.model.User;
 import com.example.qa_answer.databinding.FragmentHomeBinding;
 import com.example.qa_answer.view_model.HomeViewModel;
 

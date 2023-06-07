@@ -1,4 +1,4 @@
-package com.example.qa_answer.View.Dialog;
+package com.example.qa_answer.view.Dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
