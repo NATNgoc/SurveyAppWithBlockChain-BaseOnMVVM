@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qa_answer.data.model.Survey;
 import com.example.qa_answer.databinding.ItemSurveyBackgroundBinding;
+import com.example.qa_answer.view.Activity.HomeActivity;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,13 @@ public class SurveyAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder=(ViewHolder) holder;
         viewHolder.binding.setItem(ds.get(position));
+        viewHolder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HomeActivity activity=(HomeActivity) context;
+                activity.OnClick(ds.get(position));
+            }
+        });
     }
 
     @Override

@@ -15,8 +15,13 @@ public class QuestionReposipitory {
     FirebaseDatabase mFirebaseDatabase;
     MutableLiveData<ArrayList<Question>> dsQuestion;
 
-    public MutableLiveData<ArrayList<Question>> getListQuestion() {
-        mFirebaseDatabase.getReference("Question").addListenerForSingleValueEvent(new ValueEventListener() {
+    public QuestionReposipitory() {
+        mFirebaseDatabase=FirebaseDatabase.getInstance();
+        dsQuestion=new MutableLiveData<ArrayList<Question>>();
+    }
+
+    public MutableLiveData<ArrayList<Question>> getListQuestionById(String id) {
+        mFirebaseDatabase.getReference("Question").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Question> ds=new ArrayList<>();

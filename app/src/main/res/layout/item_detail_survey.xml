@@ -6,7 +6,7 @@
     <data>
         <variable
             name="Item"
-            type="com.example.qa_answer.data.model.DetailSurvey" />
+            type="com.example.qa_answer.data.model.Question" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -23,10 +23,13 @@
 
             <TextView
                 android:id="@+id/txtQuestion"
-                android:layout_width="349dp"
+                android:layout_width="270dp"
                 android:layout_height="55dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
-                android:text="TextView"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@{Item.question}"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -38,8 +41,11 @@
 
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -48,6 +54,7 @@
                 app:layout_constraintVertical_bias="0.5">
 
                 <FrameLayout
+                    android:id="@+id/cardView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -57,15 +64,21 @@
                         android:id="@+id/txtAnswer1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@{Item.choiceNumber1}" />
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -83,16 +96,22 @@
                         android:id="@+id/txtAnswer2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@{Item.choiceNumber2}" />
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
 
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +127,10 @@
                         android:id="@+id/txtAnswer3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@{Item.choiceNumber3}" />
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

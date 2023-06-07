@@ -3,9 +3,9 @@ package com.example.qa_answer.data.model;
 public class Answer {
     String idQuestion;
     String idUser;
-    String selectedChoice;
+    int selectedChoice;
 
-    public Answer(String idQuestion, String idUser, String selectedChoice) {
+    public Answer(String idQuestion, String idUser, int selectedChoice) {
         this.idQuestion = idQuestion;
         this.idUser = idUser;
         this.selectedChoice = selectedChoice;
@@ -30,11 +30,11 @@ public class Answer {
         this.idUser = idUser;
     }
 
-    public String getSelectedChoice() {
+    public int getSelectedChoice() {
         return selectedChoice;
     }
 
-    public void setSelectedChoice(String selectedChoice) {
+    public void setSelectedChoice(int selectedChoice) {
         this.selectedChoice = selectedChoice;
     }
 }

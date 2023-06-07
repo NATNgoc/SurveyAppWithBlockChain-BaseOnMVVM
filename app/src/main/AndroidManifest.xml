@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".DetailSurvey"
+            android:name=".view.Activity.DetailSurveyActivity"
             android:exported="false" />
         <activity
             android:name=".view.Activity.MainActivity2"

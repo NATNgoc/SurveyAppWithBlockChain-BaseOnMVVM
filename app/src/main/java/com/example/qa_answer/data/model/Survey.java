@@ -1,6 +1,8 @@
 package com.example.qa_answer.data.model;
 
-public class Survey {
+import java.io.Serializable;
+
+public class Survey implements Serializable {
     String idSurvey;
     String nameOfSurvey;
     String description;

@@ -15,15 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.qa_answer.DateFormater;
-import com.example.qa_answer.R;
 import com.example.qa_answer.data.model.Survey;
 import com.example.qa_answer.databinding.FragmentSurveyBinding;
 import com.example.qa_answer.view.Adapter.SurveyAdapter;
-import com.example.qa_answer.view_model.HomeViewModel;
 import com.example.qa_answer.view_model.SurveyViewModel;
 
 import java.util.ArrayList;
@@ -76,4 +73,6 @@ public class SurveyFragment extends Fragment {
     public static void loadUrlToImage(ImageView view, String url) {
         Glide.with(view.getContext()).load(url).into(view);
     }
+
+
 }

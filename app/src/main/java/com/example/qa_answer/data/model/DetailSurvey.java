@@ -3,10 +3,10 @@ package com.example.qa_answer.data.model;
 public class DetailSurvey {
     String idSurvey;
     String idUser;
-    Double dateSurvey;
+    long dateSurvey;
     int tokenBeRewarded;
 
-    public DetailSurvey(String idSurvey, String idUser, Double dateSurvey, int tokenBeRewarded) {
+    public DetailSurvey(String idSurvey, String idUser, long dateSurvey, int tokenBeRewarded) {
         this.idSurvey = idSurvey;
         this.idUser = idUser;
         this.dateSurvey = dateSurvey;
@@ -32,11 +32,11 @@ public class DetailSurvey {
         this.idUser = idUser;
     }
 
-    public Double getDateSurvey() {
+    public long getDateSurvey() {
         return dateSurvey;
     }
 
-    public void setDateSurvey(Double dateSurvey) {
+    public void setDateSurvey(long dateSurvey) {
         this.dateSurvey = dateSurvey;
     }
 
