@@ -61,7 +61,6 @@ public class SurveyFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<Survey> surveys) {
                 dsSurvey.clear();
-                Toast.makeText(getContext(), surveys.size()+"", Toast.LENGTH_SHORT).show();
                 dsSurvey.addAll(surveys);
                 adapter.notifyDataSetChanged();
             }
