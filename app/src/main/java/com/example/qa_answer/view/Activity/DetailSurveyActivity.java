@@ -1,23 +1,35 @@
 package com.example.qa_answer.view.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.qa_answer.data.model.Answer;
+import com.example.qa_answer.data.model.Block;
+import com.example.qa_answer.data.model.BlockChain;
 import com.example.qa_answer.data.model.DetailSurvey;
 import com.example.qa_answer.data.model.Question;
 import com.example.qa_answer.data.model.Survey;
+import com.example.qa_answer.data.repository.BlockRepository;
 import com.example.qa_answer.data.repository.UserRepository;
 import com.example.qa_answer.databinding.ActivityDetailSurveyBinding;
 import com.example.qa_answer.view.Adapter.DetailSurveyAdapter;
+import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.QuestionViewModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +38,11 @@ public class DetailSurveyActivity extends AppCompatActivity {
     ActivityDetailSurveyBinding binding;
     private QuestionViewModel viewModel;
     ArrayList<Question> dsQuestion;
+    LoadingDialog dialog;
     Survey currentSurvey;
     private DetailSurveyAdapter detailSurveyAdapter;
     ArrayList<Answer> dsAnswer;
+    Block lastBlock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +81,45 @@ public class DetailSurveyActivity extends AppCompatActivity {
                 if (check()==false) {
                     Toast.makeText(DetailSurveyActivity.this,"Bạn chưa điền hết đáp án",Toast.LENGTH_SHORT).show();
                 } else {
-                    
+                    dialog=new LoadingDialog(DetailSurveyActivity.this);
+                    dialog.show();
+                    FirebaseDatabase.getInstance().getReference("Block").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            if (snapshot.hasChildren()) {
+                                DataSnapshot lastChild = null;
+                                for (DataSnapshot child : snapshot.getChildren()) {
+                                    lastChild = child;
+                                }
+                                // Lấy item cuối cùng trong snapshot
+                                lastBlock = lastChild.getValue(Block.class);
+                                Block newBlock=new Block(lastBlock.getIndex()+1,new Date().getTime(),lastBlock.getHash(),UserRepository.getInstance().getmFirebaseAuth().getUid()
+                                        ,currentSurvey.getReward());
+                                newBlock.mineBlock(4);
+                                FirebaseDatabase.getInstance().getReference("Block").child(newBlock.getIndex()+"")
+                                        .setValue(newBlock).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                DetailSurvey detailSurvey=new DetailSurvey(currentSurvey.getIdSurvey(), FirebaseAuth.getInstance().getCurrentUser().getUid(),new Date().getTime(),currentSurvey.getReward());
+                                                FirebaseDatabase.getInstance().getReference("DetailSurvey").child(currentSurvey.getIdSurvey()).child(detailSurvey.getIdUser()).setValue(detailSurvey).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        dialog.dismiss();
+                                                        finish();
+                                                    }
+                                                });
+                                            }
+                                        });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
             }
         });
@@ -95,7 +147,7 @@ public class DetailSurveyActivity extends AppCompatActivity {
         }
     }
     private boolean check() {
-        for (int i=0;i<=dsAnswer.size();i++) {
+        for (int i=0;i<dsAnswer.size();i++) {
             Answer tmp=dsAnswer.get(i);
             if (tmp.getSelectedChoice()==-1) return false;
         }

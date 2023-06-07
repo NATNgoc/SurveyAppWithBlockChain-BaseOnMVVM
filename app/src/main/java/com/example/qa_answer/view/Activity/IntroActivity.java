@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.qa_answer.data.model.Block;
 import com.example.qa_answer.data.model.BlockChain;
@@ -34,6 +35,9 @@ public class IntroActivity extends AppCompatActivity {
         binding.viewPaper.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.viewPaper.setAdapter(adapter);
         binding.dotsIndicator.attachTo(binding.viewPaper);
+        //
+        BlockChain tmp=BlockChain.getInstance();
+        //
         binding.dotsIndicator.setFitsSystemWindows(true);
         binding.viewPaper.setFitsSystemWindows(true);
         //Attach viewPaper to TabLayout

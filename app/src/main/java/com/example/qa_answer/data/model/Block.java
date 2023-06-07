@@ -139,16 +139,23 @@ public class Block {
     }
 
     public void mineBlock(int difficulty) {
-        while (!getHash().substring(0, difficulty).equals(transferDifficultytoString(difficulty))) {
-            nonce++;
-            hash = calculateHash(this);
-        }
+//        while (!getHash().substring(0, difficulty).equals(transferDifficultytoString(difficulty))) {
+//            nonce++;
+//            hash = calculateHash(this);
+//        }
+            while (true) {
+                nonce++;
+                hash = calculateHash(this);
+                if (hash.substring(0, difficulty).equals(transferDifficultytoString(difficulty))) {
+                    break;
+                }
+            }
     }
 
     public String transferDifficultytoString(int difficulty) {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < difficulty; i++) {
-            builder.append(0);
+            builder.append('0');
         }
         return builder.toString();
     }

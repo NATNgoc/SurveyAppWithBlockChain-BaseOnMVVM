@@ -25,7 +25,6 @@ public class DetailSurveyAdapter extends RecyclerView.Adapter{
     Context context;
 
     ArrayList<Question> dsQuestion;
-    private boolean item1,item2,item3;
 
     ArrayList<Answer> dsAnswer;
     public DetailSurveyAdapter(Context context, ArrayList<Question> dsQuestion, ArrayList<Answer> dsAnswer) {
@@ -42,11 +41,11 @@ public class DetailSurveyAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        item1=item2=item3=false;
         Question currentQuestion=dsQuestion.get(position);
         ViewHolder viewHolder= (ViewHolder) holder;
         viewHolder.binding.setItem(currentQuestion);
         Answer currentAnswer=dsAnswer.get(position);
+        UpdateColor(currentAnswer.getSelectedChoice(),viewHolder.binding.cardView,viewHolder.binding.cardView2,viewHolder.binding.cardView3);
         currentAnswer.setIdQuestion(currentQuestion.getIdQuestion());
         viewHolder.binding.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,19 +89,22 @@ public class DetailSurveyAdapter extends RecyclerView.Adapter{
     private  void UpdateColor(int choice,CardView card1,CardView card2,CardView card3) {
         if (choice==1) {
             card1.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray_main));
-        } else {
-            card1.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
-        }
+            card2.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            card3.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        } else
         if (choice==2) {
             card2.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray_main));
-        } else {
-            card2.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
-        }
+            card1.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            card3.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        } else
         if (choice==3) {
             card3.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray_main));
+            card2.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            card1.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
         } else {
             card3.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            card2.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
+            card1.setCardBackgroundColor(ContextCompat.getColor(context, R.color.white));
         }
-
     }
 }
