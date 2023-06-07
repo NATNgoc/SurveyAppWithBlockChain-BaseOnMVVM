@@ -8,14 +8,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class BlockChain {
-    int proofOfWork;
-    private static BlockChain instance=null;
+    private int proofOfWork;
+    private static BlockChain instance = null;
 
     private BlockChain() {
         FirebaseDatabase.getInstance().getReference("BlockChain").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                proofOfWork=snapshot.getValue(Integer.class);
+                BlockChain blockChain = snapshot.getValue(BlockChain.class);
+                blockChain.setProofOfWork(blockChain.getProofOfWork());
             }
 
             @Override
@@ -26,9 +27,17 @@ public class BlockChain {
     }
 
     public static BlockChain getInstance() {
-        if (instance==null) {
-            instance=new BlockChain();
-         }
+        if (instance == null) {
+            instance = new BlockChain();
+        }
         return instance;
+    }
+
+    public int getProofOfWork() {
+        return this.proofOfWork;
+    }
+
+    public void setProofOfWork(int proofOfWork) {
+        this.proofOfWork = proofOfWork;
     }
 }
