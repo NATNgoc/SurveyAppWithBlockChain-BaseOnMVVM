@@ -27,6 +27,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                app:imgUrl="@{Item.imageOfSurvey}"
                 android:layout_weight="2.5"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -66,6 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
+                            app:timeStamp="@{Item.dateEnd}"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -91,7 +93,7 @@
                                 android:id="@+id/textView14"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="sd"
+                                android:text="@{Item.description}"
                                 android:textSize="16sp" />
                         </FrameLayout>
                     </ScrollView>
@@ -132,7 +134,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="sdsa"
+                        android:text="@{Item.nameOfSurvey}"
                         android:textSize="16sp"
 
                         app:layout_constraintBottom_toTopOf="@+id/textView11"
@@ -163,6 +165,7 @@
                             android:id="@+id/txtDateStart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:timeStamp="@{Item.dateStart}"
                             android:layout_marginStart="10dp"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -178,7 +181,7 @@
                         android:id="@+id/txtMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ádasd}"
+                        android:text="@{Item.reward}"
                         android:textSize="60sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
