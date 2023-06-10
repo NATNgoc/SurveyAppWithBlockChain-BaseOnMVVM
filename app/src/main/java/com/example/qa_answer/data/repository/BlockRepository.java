@@ -1,6 +1,7 @@
 package com.example.qa_answer.data.repository;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.qa_answer.data.model.Block;
@@ -15,19 +16,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class BlockRepository {
-    FirebaseDatabase mFirebaseDatabase;
-    MutableLiveData<ArrayList<Block>> dsBlock;
-    MutableLiveData<Boolean> isAddSuccessful;
-    MutableLiveData<Block> lastBlock;
+    private FirebaseDatabase mFirebaseDatabase;
+    private MutableLiveData<ArrayList<Block>> _dsBlock;
+    private LiveData<ArrayList<Block>> dsBlock;
+    public MutableLiveData<Boolean> isAddSuccessful;
+    private MutableLiveData<Block> _lastBlock;
+    public LiveData<Block> lastBlock;
 
-    public BlockRepository() {
-        lastBlock=new MutableLiveData<>();
-        dsBlock=new MutableLiveData<>();
+
+    private static BlockRepository instance=null;
+
+    private BlockRepository() {
         mFirebaseDatabase=FirebaseDatabase.getInstance();
+        _lastBlock=new MutableLiveData<>();
+        _dsBlock=new MutableLiveData<>();
+        isAddSuccessful=new MutableLiveData<>();
+        getLastestBlock();
+        getDsBlock();
+        dsBlock=_dsBlock;
+        lastBlock=_lastBlock;
     }
 
-    public MutableLiveData<ArrayList<Block>> getDsBlock() {
-        mFirebaseDatabase.getReference("Block").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getDsBlock() {
+        mFirebaseDatabase.getReference("Block").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Block> ds=new ArrayList<>();
@@ -35,7 +46,7 @@ public class BlockRepository {
                     Block tmp=item.getValue(Block.class);
                     ds.add(tmp);
                 }
-                dsBlock.postValue(ds);
+                _dsBlock.postValue(ds);
             }
 
             @Override
@@ -43,27 +54,29 @@ public class BlockRepository {
 
             }
         });
-        return dsBlock;
+
     }
 
     public MutableLiveData<Boolean> addBlock(Block block) {
-        isAddSuccessful=new MutableLiveData<>();
+
             mFirebaseDatabase.getReference("Block")
-                    .child(block.getIndex()+"").push().
-                    setValue(block).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful())
-                        isAddSuccessful.postValue(true);
-                    else
-                        isAddSuccessful.postValue(false);
-                }
-            });
-            return null;
+                    .child(block.getIndex()+"")
+                    .setValue(block).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                isAddSuccessful.postValue(true);
+                            } else {
+                                isAddSuccessful.postValue(false);
+                            }
+                        }
+                    });
+
+            return isAddSuccessful;
     }
 
-    public MutableLiveData<Block> getLastestBlock() {
-        mFirebaseDatabase.getReference("Block").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getLastestBlock() {
+        mFirebaseDatabase.getReference("Block").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
@@ -73,7 +86,7 @@ public class BlockRepository {
                     }
                     // Lấy item cuối cùng trong snapshot
                     Block lastItem = lastChild.getValue(Block.class);
-                    lastBlock.postValue(lastItem);
+                    _lastBlock.postValue(lastItem);
                 }
             }
             @Override
@@ -81,14 +94,24 @@ public class BlockRepository {
 
             }
         });
+    }
+
+    public static BlockRepository getInstance() {
+        if (instance==null) {
+            instance=new BlockRepository();
+        }
+        return instance;
+    }
+
+    public MutableLiveData<Boolean> getIsAddSuccessful() {
+        return isAddSuccessful;
+    }
+
+    public LiveData<Block> getLastBlock() {
         return lastBlock;
     }
 
-    public MutableLiveData<Block> getLastBlock() {
-        return lastBlock;
-    }
-
-    public void setLastBlock(MutableLiveData<Block> lastBlock) {
+    public void setLastBlock(LiveData<Block> lastBlock) {
         this.lastBlock = lastBlock;
     }
 }

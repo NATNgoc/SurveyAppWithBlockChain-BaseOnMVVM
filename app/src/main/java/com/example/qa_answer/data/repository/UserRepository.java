@@ -8,7 +8,6 @@ public class UserRepository {
     private static UserRepository instance=null;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseDatabase mFirebaseDatabase;
-    private User current;
 
     private UserRepository() {
         mFirebaseAuth=FirebaseAuth.getInstance();

@@ -17,7 +17,7 @@ public class QuestionReposipitory {
 
     public QuestionReposipitory() {
         mFirebaseDatabase=FirebaseDatabase.getInstance();
-        dsQuestion=new MutableLiveData<ArrayList<Question>>();
+        dsQuestion=new MutableLiveData<>(new ArrayList<Question>());
     }
 
     public MutableLiveData<ArrayList<Question>> getListQuestionById(String id) {

@@ -18,12 +18,14 @@ import com.example.qa_answer.data.model.BlockChain;
 import com.example.qa_answer.data.model.DetailSurvey;
 import com.example.qa_answer.data.model.Question;
 import com.example.qa_answer.data.model.Survey;
+import com.example.qa_answer.data.model.User;
 import com.example.qa_answer.data.repository.BlockRepository;
 import com.example.qa_answer.data.repository.UserRepository;
 import com.example.qa_answer.databinding.ActivityDetailSurveyBinding;
 import com.example.qa_answer.view.Adapter.DetailSurveyAdapter;
 import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.QuestionViewModel;
+import com.example.qa_answer.view_model.QuestionViewModelFactory;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -50,21 +52,32 @@ public class DetailSurveyActivity extends AppCompatActivity {
         binding=ActivityDetailSurveyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.setLifecycleOwner(this);
-        viewModel=new ViewModelProvider(this).get(QuestionViewModel.class);
-        binding.setQuestionViewModel(viewModel);
-        dsAnswer =new ArrayList<>();
+        //Lấy survey hiện tại
         currentSurvey= (Survey) getIntent().getSerializableExtra("Item");
-        dsQuestion=viewModel.dsDetailSurvey.getValue();
+        //Set UI
+        setUI();
+        //Set event
+        setEvent();
+    }
+
+    private void setUI() {
+        //Khởi tạo viewmodel
+        QuestionViewModelFactory factory = new QuestionViewModelFactory(currentSurvey.getIdSurvey());
+        ViewModelProvider viewModelProvider = new ViewModelProvider(this, factory);
+        viewModel = viewModelProvider.get(QuestionViewModel.class);
+        binding.setQuestionViewModel(viewModel);
+        //Tạo danh sách answer
+        dsAnswer =new ArrayList<>();
+        //Get danh sách câu hỏi từ viewModel
+        dsQuestion=viewModel.dsQuestion.getValue();
+        //Tạo adapter
         detailSurveyAdapter=new DetailSurveyAdapter(DetailSurveyActivity.this,dsQuestion, dsAnswer);
         //
         observeList();
-        viewModel.getQuestionById2(currentSurvey.getIdSurvey());
-        //
+        //Set recycleView
         binding.ryc.setHasFixedSize(true);
         binding.ryc.setLayoutManager(new LinearLayoutManager(DetailSurveyActivity.this, RecyclerView.VERTICAL,false));
         binding.ryc.setAdapter(detailSurveyAdapter);
-        //
-        setEvent();
     }
 
     private void setEvent() {
@@ -80,54 +93,41 @@ public class DetailSurveyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dialog=new LoadingDialog(DetailSurveyActivity.this);
                 dialog.show();
-                if (check()==false) {
-                    dialog.dismiss();
-                    Toast.makeText(DetailSurveyActivity.this,"Bạn chưa điền hết đáp án",Toast.LENGTH_SHORT).show();
-                } else {
-                    FirebaseDatabase.getInstance().getReference("Block").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (check()==true) {
+//                    dialog.dismiss();
+//                    Toast.makeText(DetailSurveyActivity.this,"Bạn chưa điền hết đáp án",Toast.LENGTH_SHORT).show();
+//                } else {
+                    BlockRepository blockRepository=BlockRepository.getInstance();
+                    Block lastBlock=BlockRepository.getInstance().getLastBlock().getValue();
+                    Block newBlock=new Block(lastBlock.getIndex()+1,new Date().getTime(),lastBlock.getHash(),UserRepository.getInstance().getmFirebaseAuth().getUid(),currentSurvey.getReward());
+                    newBlock.mineBlock(BlockChain.getInstance().getProofOfWork());
+                    Toast.makeText(DetailSurveyActivity.this,lastBlock.toString(),Toast.LENGTH_LONG).show();
 
-                            if (snapshot.hasChildren()) {
-                                DataSnapshot lastChild = null;
-                                for (DataSnapshot child : snapshot.getChildren()) {
-                                    lastChild = child;
-                                }
-                                // Lấy item cuối cùng trong snapshot
-                                lastBlock = lastChild.getValue(Block.class);
-                                Block newBlock=new Block(lastBlock.getIndex()+1,new Date().getTime(),lastBlock.getHash(),UserRepository.getInstance().getmFirebaseAuth().getUid()
-                                        ,currentSurvey.getReward());
-                                newBlock.mineBlock(BlockChain.getInstance().getProofOfWork());
-                                FirebaseDatabase.getInstance().getReference("Block").child(newBlock.getIndex()+"")
-                                        .setValue(newBlock).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                DetailSurvey detailSurvey=new DetailSurvey(currentSurvey.getIdSurvey(), FirebaseAuth.getInstance().getCurrentUser().getUid(),new Date().getTime(),currentSurvey.getReward());
-                                                FirebaseDatabase.getInstance().getReference("DetailSurvey").child(currentSurvey.getIdSurvey()).child(detailSurvey.getIdUser()).setValue(detailSurvey).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        dialog.dismiss();
-                                                    }
-                                                });
-                                            }
-                                        });
+                    BlockRepository.getInstance().isAddSuccessful.observe(DetailSurveyActivity.this, new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(Boolean aBoolean) {
+                            if (aBoolean==true) {
+                                Toast.makeText(DetailSurveyActivity.this,"Điểm thưởng sẽ được cộng sau vài giây",Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                                finish();
+                            } else {
+                                Toast.makeText(DetailSurveyActivity.this,"Thất bại",Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
                             }
                         }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
                     });
-
+                    blockRepository.addBlock(newBlock);
+                    User currentUser=HomeActivity.getCurrentUser();
+                    currentUser.setToken(currentUser.getToken()+currentSurvey.getReward());
+                    UserRepository.getInstance().getmFirebaseDatabase().getReference("User").child(currentUser.getIdUser()).setValue(currentUser);
                 }
-            }
+//            }
         });
 
     }
 
     private void observeList() {
-        viewModel.dsDetailSurvey.observe(this, new Observer<ArrayList<Question>>() {
+        viewModel.dsQuestion.observe(this, new Observer<ArrayList<Question>>() {
             @Override
             public void onChanged(ArrayList<Question> questions) {
                 dsQuestion.clear();

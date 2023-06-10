@@ -37,6 +37,7 @@ public class IntroActivity extends AppCompatActivity {
         binding.dotsIndicator.attachTo(binding.viewPaper);
         //
         BlockChain tmp=BlockChain.getInstance();
+        BlockRepository blockRepository=BlockRepository.getInstance();
         //
         binding.dotsIndicator.setFitsSystemWindows(true);
         binding.viewPaper.setFitsSystemWindows(true);

@@ -12,7 +12,7 @@ public class BlockChain {
     private static BlockChain instance = null;
 
     private BlockChain() {
-        FirebaseDatabase.getInstance().getReference("BlockChain").child("proofOfWork").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("BlockChain").child("proofOfWork").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                setProofOfWork(snapshot.getValue(Integer.class));
