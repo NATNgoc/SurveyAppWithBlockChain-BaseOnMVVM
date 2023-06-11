@@ -19,14 +19,18 @@ import com.example.qa_answer.data.model.DetailSurvey;
 import com.example.qa_answer.data.model.Question;
 import com.example.qa_answer.data.model.Survey;
 import com.example.qa_answer.data.model.User;
+import com.example.qa_answer.data.repository.AnswerRepository;
 import com.example.qa_answer.data.repository.BlockRepository;
+import com.example.qa_answer.data.repository.DetailSurveyRepository;
 import com.example.qa_answer.data.repository.UserRepository;
 import com.example.qa_answer.databinding.ActivityDetailSurveyBinding;
 import com.example.qa_answer.view.Adapter.DetailSurveyAdapter;
 import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view_model.QuestionViewModel;
 import com.example.qa_answer.view_model.QuestionViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -107,9 +111,22 @@ public class DetailSurveyActivity extends AppCompatActivity {
                         @Override
                         public void onChanged(Boolean aBoolean) {
                             if (aBoolean==true) {
-                                Toast.makeText(DetailSurveyActivity.this,"Điểm thưởng sẽ được cộng sau vài giây",Toast.LENGTH_LONG).show();
-                                dialog.dismiss();
-                                finish();
+                                AnswerRepository answerRepository=new AnswerRepository();
+                                answerRepository.getIsAddSuccessful().observe(DetailSurveyActivity.this, new Observer<Boolean>() {
+                                    @Override
+                                    public void onChanged(Boolean aBoolean) {
+                                        if (aBoolean==true) {
+                                            Toast.makeText(DetailSurveyActivity.this, "Điểm thưởng sẽ được cộng sau vài giây", Toast.LENGTH_LONG).show();
+                                            dialog.dismiss();
+                                            finish();
+                                        } else {
+                                            Toast.makeText(DetailSurveyActivity.this, "Thất bại", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+                                    }
+                                });
+                                answerRepository.addDsAnswer(dsAnswer,0);
+
                             } else {
                                 Toast.makeText(DetailSurveyActivity.this,"Thất bại",Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
@@ -119,7 +136,16 @@ public class DetailSurveyActivity extends AppCompatActivity {
                     blockRepository.addBlock(newBlock);
                     User currentUser=HomeActivity.getCurrentUser();
                     currentUser.setToken(currentUser.getToken()+currentSurvey.getReward());
-                    UserRepository.getInstance().getmFirebaseDatabase().getReference("User").child(currentUser.getIdUser()).setValue(currentUser);
+                    UserRepository.getInstance().getmFirebaseDatabase().getReference("User").child(currentUser.getIdUser()).setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                DetailSurvey detailSurvey=new DetailSurvey(currentSurvey.getIdSurvey(),currentUser.getIdUser(),new Date().getTime(),currentSurvey.getReward());
+                                DetailSurveyRepository repository=new DetailSurveyRepository();
+                                repository.addDetailSurvey(detailSurvey);
+                            }
+                        }
+                    });
                 }
 //            }
         });
