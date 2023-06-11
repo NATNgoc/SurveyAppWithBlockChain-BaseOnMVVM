@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,17 +16,18 @@ import com.example.qa_answer.view.Dialog.LoadingDialog;
 import com.example.qa_answer.view.Fragment.HomeFragment;
 import com.example.qa_answer.view.Fragment.SurveyFragment;
 import com.example.qa_answer.view.ItemClickInterface;
-import com.example.qa_answer.view_model.HomeViewModel;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 
 
 public class HomeActivity extends AppCompatActivity implements ItemClickInterface {
     ActivityHomeBinding binding;
-    private HomeViewModel viewModel;
     private static User currentUser;
     private LoadingDialog dialog;
 
@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements ItemClickInterfac
 
     private void initUser() {
         UserRepository.getInstance().getmFirebaseDatabase().getReference("User")
-                .child(UserRepository.getInstance().getmFirebaseAuth().getCurrentUser().getUid())
+                .child(Objects.requireNonNull(UserRepository.getInstance().getmFirebaseAuth().getCurrentUser()).getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -65,21 +65,18 @@ public class HomeActivity extends AppCompatActivity implements ItemClickInterfac
     }
 
     private void setEventForBottomNavigation() {
-        binding.bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public boolean onItemSelect(int i) {
-                Fragment tmp=new HomeFragment();
-                switch (i) {
-                    case 0:
-                        tmp=new HomeFragment();
-                        break;
-                    case 1:
-                        tmp=new SurveyFragment();
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.layoutBackground,tmp).commit();
-                return true;
+        binding.bottomBar.setOnItemSelectedListener((OnItemSelectedListener) i -> {
+            Fragment tmp=new HomeFragment();
+            switch (i) {
+                case 0:
+                    tmp=new HomeFragment();
+                    break;
+                case 1:
+                    tmp=new SurveyFragment();
+                    break;
             }
+            getSupportFragmentManager().beginTransaction().replace(R.id.layoutBackground,tmp).commit();
+            return true;
         });
 
     }

@@ -1,25 +1,22 @@
 package com.example.qa_answer.view.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.qa_answer.data.model.Block;
+
 import com.example.qa_answer.data.model.BlockChain;
 import com.example.qa_answer.data.repository.BlockRepository;
 import com.example.qa_answer.databinding.ActivityIntroBinding;
 import com.example.qa_answer.view.Adapter.IntroActivityAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Date;
+
+
 
 public class IntroActivity extends AppCompatActivity {
 

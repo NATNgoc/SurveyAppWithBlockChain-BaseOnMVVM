@@ -30,32 +30,22 @@ public class Block {
         this.token = token;
     }
 
+    public Block createGenesisBlock() {
+        index=0;
+        nonce=0;
+        timeStamp=System.currentTimeMillis();
+        previousHash=0+"";
+        uid="237uhkasjhdnsadn";
+        int token=1092383;
+        Block tmp=new Block(index,timeStamp,previousHash,uid,token);
+        tmp.mineBlock(3);
+        return tmp;
+    }
+
     public Block() {
     }
 
     private static String calculateHash(Block block) {
-//        if (block!=null) {
-//            MessageDigest messageDigest;
-//            try {
-//                messageDigest=MessageDigest.getInstance("SHA-256");
-//
-//            }
-//            catch (NoSuchAlgorithmException e) {
-//                return null;
-//            }
-//            String txt=block.getStringData();
-//            final  byte[] bytes=messageDigest.digest(txt.getBytes());
-//            final StringBuilder builder=new StringBuilder();
-//            for (final byte b:bytes) {
-//                String hex=Integer.toHexString(0xff & b);
-//                if (hex.length()==1) {
-//                    builder.append('0');
-//                }
-//                builder.append(hex);
-//                return builder.toString();
-//            }
-//        }
-//        return null;
         if (block != null) {
             MessageDigest messageDigest;
             try {

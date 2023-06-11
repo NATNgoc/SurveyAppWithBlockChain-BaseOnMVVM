@@ -6,6 +6,9 @@
 
     <data>
         <variable
+            name="DetailSurveyViewModel"
+            type="com.example.qa_answer.view_model.DetailSurveyViewModel" />
+        <variable
             name="QuestionViewModel"
             type="com.example.qa_answer.view_model.QuestionViewModel" />
     </data>
